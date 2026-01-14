@@ -19,13 +19,13 @@ Features
 
 Installation
 ------------
-2. Install the dependencies
+1. Install the dependencies
     ```bash
     pip install -r requirements.txt
     
-3. Paste your Google API in genai.py (line 3)
+2. Paste your Google API in genai.py (line 3)
    
-4. Run the application:
+3. Run the application:
     ```bash
     flask run
 
