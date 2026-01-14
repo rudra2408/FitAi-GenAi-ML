@@ -1,0 +1,16 @@
+cs50
+Flask
+Flask-Session
+requests
+cachelib
+google-generativeai
+pillow
+pandas
+scikit-learn
+matplotlib
+click
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
