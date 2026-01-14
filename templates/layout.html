@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Bundle JS with Popper -->
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Favicon and Custom CSS -->
+    <link href="/static/favicon.ico" rel="icon">
+    <link href="/static/styles.css" rel="stylesheet">
+    <!-- Page Title -->
+    <title>FitAI-Your Fitness Partner: {% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .event {
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+        .event img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .event h2 {
+            color: #265101; /* A vibrant color for headings */
+        }
+        .event ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .event li {
+            margin-bottom: 10px;
+            font-weight: 400;
+            color: #555;
+        }
+    </style>
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #0056b3;
+        }
+        .blue {
+            color: #0056b3;
+        }
+        footer {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #fff;
+            border-top: 1px solid #eaeaea;
+        }
+        .footer-link {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+    <body>
+
+        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><span class="blue">FitAI- your fitness partner</span></a>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    {% if session["user_id"] %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/homepage">Homepage</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/events">Fitness Events</a></li>
+
+                            <!-- Dropdown for Order related links -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dataDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add user information
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="orderDropdown">
+                                    <li><a class="dropdown-item" href="/calories_automated">Add food logs (Automated)</a></li>
+                                    <li><a class="dropdown-item" href="/calories">Add food logs (Manual)</a></li>
+                                    <li><a class="dropdown-item" href="/exercise">Add exercise logs</a></li>
+                                    <li><a class="dropdown-item" href="/log_weight">Add weight logs</a></li>
+                                    <li><a class="dropdown-item" href="/add_illness">Add illness history</a></li>
+                                    <li><a class="dropdown-item" href="/generate_fitness_plan">Generate fitness plan</a></li>
+                                    <li><a class="dropdown-item" href="/activity_level">Add user activity level</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="viewDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    View user information
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="orderDropdown">
+                                    <li><a class="dropdown-item" href="/view_calories">View food logs</a></li>
+                                    <li><a class="dropdown-item" href="/view_exercises">View exercise logs</a></li>
+                                    <li><a class="dropdown-item" href="/view_weights">View weight logs</a></li>
+                                    <li><a class="dropdown-item" href="/view_illness_history">View illness history</a></li>
+                                    <li><a class="dropdown-item" href="/view_fitness_plans">View recommended fitness plan</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Your account
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="accountDropdownn">
+                                    <li><a class="dropdown-item" href="/changepwd">Change Password</a></li></li>
+                                    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                                </ul>
+                            </li>
+                    {% else %}
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <main class="container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+
+    </body>
+
+</html>
+

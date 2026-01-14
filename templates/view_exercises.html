@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+View Exercise Details
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Exercise Details</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Distance covered (km)</th>
+                <th>Time taken (minutes)</th>
+                <th>Speed (km/h)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in exercise_details %}
+            <tr>
+                <td>{{ detail.date_log }}</td>
+                <td>{{ detail.distance_covered }}</td>
+                <td>{{ detail.time_taken }}</td>
+                <td>{{ '%.2f'|format(detail.speed) }}</td> <!-- Formatted to two decimal places -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img src="{{ url_for('static', filename='plot_distance.png') }}" alt="Plot">
+    <img src="{{ url_for('static', filename='plot_speed.png') }}" alt="Plot">
+
+</div>
+{% endblock %}

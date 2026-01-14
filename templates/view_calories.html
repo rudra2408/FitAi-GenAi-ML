@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+View Calorie Details
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Calorie Details</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Calories</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in calorie_details %}
+            <tr>
+                <td>{{ detail.date_log }}</td>
+                <td>{{ detail.calories }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <img src="{{ url_for('static', filename='plot_calories.png') }}" alt="Plot">
+</div>
+{% endblock %}
